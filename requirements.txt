@@ -1,0 +1,7 @@
+altair
+matplotlib
+neattext
+pandas
+spacy
+streamlit
+textblob
