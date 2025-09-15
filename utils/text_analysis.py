@@ -16,10 +16,13 @@ matplotlib.use('Agg')
 
 # NLP Pkgs
 from textblob import TextBlob
+from textblob import download_corpora
+download_corpora.download_all()
 import spacy
 from spacy import displacy
 from collections import Counter
 from wordcloud import WordCloud
+
 
 
 # --- SpaCy setup ---
