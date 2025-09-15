@@ -25,13 +25,22 @@ from wordcloud import WordCloud
 # Load the small English model, download automatically if missing
 @st.cache_resource
 def load_nlp():
-    try:
-        return spacy.load("en_core_web_sm")
-    except OSError:
-        from spacy.cli import download
-        with st.spinner("Downloading SpaCy model 'en_core_web_sm'..."):
-            download("en_core_web_sm")
-        return spacy.load("en_core_web_sm")
+    import spacy
+    from spacy.util import is_package
+    from spacy.cli import download
+
+    model = "en_core_web_sm"
+
+    # if already installed, just load
+    if is_package(model):
+        return spacy.load(model)
+
+    # otherwise download into current working directory
+    with st.spinner("Downloading SpaCy model... one time only"):
+        download(model)
+
+    return spacy.load(model)
+
 
 nlp = load_nlp()
 
