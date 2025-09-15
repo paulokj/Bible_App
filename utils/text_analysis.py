@@ -21,38 +21,16 @@ from spacy import displacy
 from collections import Counter
 from wordcloud import WordCloud
 
-# --- SpaCy setup ---
-# Load the small English model, download automatically if missing
-# @st.cache_resource
-# def load_nlp():
-#     import spacy
-#     from spacy.util import is_package
-#     from spacy.cli import download
-
-#     model = "en_core_web_sm"
-
-#     # if already installed, just load
-#     if is_package(model):
-#         return spacy.load(model)
-
-#     # otherwise download into current working directory
-#     with st.spinner("Downloading SpaCy model... one time only"):
-#         download(model)
-
-#     return spacy.load(model)
-
-
-# nlp = load_nlp()
 
 # --- SpaCy setup ---
 # Load the small English model
-try:
-    nlp = spacy.load('en_core_web_sm')
-except OSError:
-    # This should no longer happen in a properly deployed environment
-    # where the model is installed from requirements.txt
-    st.error("SpaCy model 'en_core_web_sm' not found.")
-    st.stop()
+# try:
+#     # nlp = spacy.load('en_core_web_sm')
+# except OSError:
+#     # This should no longer happen in a properly deployed environment
+#     # where the model is installed from requirements.txt
+#     st.error("SpaCy model 'en_core_web_sm' not found.")
+#     st.stop()
 
 # Design
 from utils.template import HTML_WRAPPER, HTML_BANNER
@@ -124,14 +102,14 @@ def mytag_visualizer(tagged_docx):
     return ' '.join(colored_text)
 
 
-def render_entities(raw_text):
-    """
-    Renders named entities from text using spaCy and displaCy.
-    """
-    docx = nlp(raw_text)
-    html = displacy.render(docx, style='ent', page=False)
-    result = HTML_WRAPPER.format(html)
-    stc.html(result, height=1000, scrolling=True)
+# def render_entities(raw_text):
+#     """
+#     Renders named entities from text using spaCy and displaCy.
+#     """
+#     docx = nlp(raw_text)
+#     html = displacy.render(docx, style='ent', page=False)
+#     result = HTML_WRAPPER.format(html)
+#     stc.html(result, height=1000, scrolling=True)
 
 def plot_most_common_tokens(docx, num=10):
     # This regular expression splits the text into words and also handles punctuation

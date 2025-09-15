@@ -15,7 +15,7 @@ from utils.template import HTML_WRAPPER
 import neattext.functions as nfx
 
 # NLP analysis
-from utils.text_analysis import (render_entities, get_tags, mytag_visualizer,
+from utils.text_analysis import ( get_tags, mytag_visualizer,
                                  plot_most_common_tokens, plot_mendelhall_curve,
                                  plot_word_freq_with_altair, plot_tags_value_count,
                                  render_word_cloud)
@@ -63,10 +63,10 @@ def multiverse_page():
             # st.write(row['text'])
 
     with col2:
-        st.success("Study Mode")
-        with st.expander("Visualize Entities"):
-            # st.write(docx)
-            render_entities(docx)
+        # st.success("Study Mode")
+        # with st.expander("Visualize Entities"):
+        #     # st.write(docx)
+        #     render_entities(docx)
 
         with st.expander("Visualize Pos Tags"):
             tagged_docx = get_tags(docx)
