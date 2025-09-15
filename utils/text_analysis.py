@@ -23,26 +23,36 @@ from wordcloud import WordCloud
 
 # --- SpaCy setup ---
 # Load the small English model, download automatically if missing
-@st.cache_resource
-def load_nlp():
-    import spacy
-    from spacy.util import is_package
-    from spacy.cli import download
+# @st.cache_resource
+# def load_nlp():
+#     import spacy
+#     from spacy.util import is_package
+#     from spacy.cli import download
 
-    model = "en_core_web_sm"
+#     model = "en_core_web_sm"
 
-    # if already installed, just load
-    if is_package(model):
-        return spacy.load(model)
+#     # if already installed, just load
+#     if is_package(model):
+#         return spacy.load(model)
 
-    # otherwise download into current working directory
-    with st.spinner("Downloading SpaCy model... one time only"):
-        download(model)
+#     # otherwise download into current working directory
+#     with st.spinner("Downloading SpaCy model... one time only"):
+#         download(model)
 
-    return spacy.load(model)
+#     return spacy.load(model)
 
 
-nlp = load_nlp()
+# nlp = load_nlp()
+
+# --- SpaCy setup ---
+# Load the small English model
+try:
+    nlp = spacy.load('en_core_web_sm')
+except OSError:
+    # This should no longer happen in a properly deployed environment
+    # where the model is installed from requirements.txt
+    st.error("SpaCy model 'en_core_web_sm' not found.")
+    st.stop()
 
 # Design
 from utils.template import HTML_WRAPPER, HTML_BANNER
