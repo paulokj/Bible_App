@@ -19,14 +19,17 @@ from textblob import TextBlob
 import spacy
 from spacy import displacy
 from collections import Counter
+from wordcloud import WordCloud
 
 # --- SpaCy setup ---
-# Load the small English model
+# Load the small English model, download automatically if missing
 try:
-    nlp = spacy.load('en_core_web_sm')
+    nlp = spacy.load("en_core_web_sm")
 except OSError:
-    st.error("SpaCy model 'en_core_web_sm' not found. Please run 'python -m spacy download en_core_web_sm' in your terminal.")
-    st.stop()
+    from spacy.cli import download
+    with st.spinner("Downloading SpaCy model 'en_core_web_sm'... (one-time setup)"):
+        download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
 
 # Design
 from utils.template import HTML_WRAPPER, HTML_BANNER
@@ -145,3 +148,17 @@ def plot_tags_value_count(docx):
     #  st.dataframe(df_tag_count)
      c = alt.Chart(df_tag_count).mark_bar().encode(x='tag_type', y='counts')
      st.altair_chart(c)
+
+def render_word_cloud(raw_text):
+    """
+    Generates and renders a word frequency cloud from the text.
+    """
+    if not raw_text:
+        return
+        
+    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(raw_text)
+    
+    plt.figure(figsize=(10, 5))
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis('off')
+    st.pyplot(plt)

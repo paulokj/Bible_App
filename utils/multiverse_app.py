@@ -17,7 +17,8 @@ import neattext.functions as nfx
 # NLP analysis
 from utils.text_analysis import (render_entities, get_tags, mytag_visualizer,
                                  plot_most_common_tokens, plot_mendelhall_curve,
-                                 plot_word_freq_with_altair, plot_tags_value_count)
+                                 plot_word_freq_with_altair, plot_tags_value_count,
+                                 render_word_cloud)
 
 def multiverse_page():
     st.subheader("Multi Verse Retrieval")
@@ -85,5 +86,8 @@ def multiverse_page():
 
     with st.expander("PoS Tags Plot"):
         plot_tags_value_count(docx)
+
+    with st.expander("Word Cloud"):
+        render_word_cloud(docx)
 
 
