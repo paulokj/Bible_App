@@ -2,7 +2,8 @@
 
 A simple **Bible Study App** built with [Streamlit](https://streamlit.io/), featuring **verse search** and **basic NLP-powered text analysis**.  
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)]([https://bible-app.streamlit.app](https://bibleapp-9cg7hlsdpkzptrpkp7abya.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://bibleapp-9cg7hlsdpkzptrpkp7abya.streamlit.app/)
+
 
 ---
 
